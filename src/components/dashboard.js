@@ -2,6 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import requiresLogin from './requires-login';
 import { fetchProtectedData } from '../actions/protected-data';
+import landingPage from './landing-page'
+import { Championselector } from './championSelector'
 
 export class Dashboard extends React.Component {
     componentDidMount() {
@@ -12,7 +14,9 @@ export class Dashboard extends React.Component {
         return (
             <div className="dashboard">
                 <h1>Pick your champions</h1>
-
+                <div>
+                    <Championselector />
+                </div>
             </div>
         );
     }
@@ -20,11 +24,13 @@ export class Dashboard extends React.Component {
 
 const mapStateToProps = state => {
     // const { currentUser } = state.auth;
-    // return {
-    //     username: state.auth.currentUser.username,
-    //     name: `${currentUser.firstName} ${currentUser.lastName}`,
-    //     protectedData: state.protectedData.data
-    // };
+    const { champions } = state.champions;
+    return {
+        //     username: state.auth.currentUser.username,
+        //     name: `${currentUser.firstName} ${currentUser.lastName}`,
+        //     protectedData: state.protectedData.data
+        champions: champions
+    };
 };
 
 export default (connect(mapStateToProps)(Dashboard));
